@@ -13,7 +13,6 @@ import com.example.flixter.models.Movie;
 import com.facebook.stetho.common.ArrayListAccumulator;
 
 import okhttp3.Headers;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
