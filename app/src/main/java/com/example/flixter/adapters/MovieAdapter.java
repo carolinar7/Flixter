@@ -61,7 +61,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             v1.tvTitle.setText(movie.getTitle());
 
             String imageUrl = movie.getPosterPath();
-            int placeholder = R.drawable.poster_placeholder_background;
+            int placeholder = R.drawable.placeholder;
 
             Glide.with(context).load(imageUrl).placeholder(placeholder).into(v1.ivPoster);
         }
@@ -72,7 +72,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         if (movie != null) {
             String imageUrl = movie.getBackdropPath();;
-            int placeholder = R.drawable.backdrop_placeholder_background;
+            int placeholder = R.drawable.backdrop_placeholder;
 
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 v2.tvOverview.setText(movie.getOverview());
