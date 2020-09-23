@@ -60,27 +60,27 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             v1.tvOverview.setText(movie.getOverview());
             v1.tvTitle.setText(movie.getTitle());
 
-            String imageUrl;
-            int placeholder;
+            String imageUrl = movie.getPosterPath();
+            int placeholder = R.drawable.poster_placeholder_background;
 
-            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                imageUrl = movie.getBackdropPath();
-                placeholder = R.drawable.backdrop_placeholder_background;
-            } else {
-                imageUrl = movie.getPosterPath();
-                placeholder = R.drawable.poster_placeholder_background;
-            }
             Glide.with(context).load(imageUrl).placeholder(placeholder).into(v1.ivPoster);
         }
     }
 
     private void configureViewHolder2(ViewHolderHighRating v2, int position) {
         Movie movie = (Movie) movies.get(position);
-        String imageUrl;
-        int placeholder;
-        imageUrl = movie.getBackdropPath();
-        placeholder = R.drawable.backdrop_placeholder_background;
-        Glide.with(context).load(imageUrl).placeholder(placeholder).into(v2.ivPoster);
+
+        if (movie != null) {
+            String imageUrl = movie.getBackdropPath();;
+            int placeholder = R.drawable.backdrop_placeholder_background;
+
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                v2.tvOverview.setText(movie.getOverview());
+                v2.tvTitle.setText(movie.getTitle());
+            }
+
+            Glide.with(context).load(imageUrl).placeholder(placeholder).into(v2.ivPoster);
+        }
     }
 
     @Override
@@ -114,10 +114,14 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public class ViewHolderHighRating extends RecyclerView.ViewHolder {
 
+        TextView tvTitle;
+        TextView tvOverview;
         ImageView ivPoster;
 
         public ViewHolderHighRating(@NonNull View itemView) {
             super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
         }
     }
