@@ -1,7 +1,7 @@
 package com.example.flixter.adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,14 +31,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder");
         View movieView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
         return new ViewHolder(movieView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder " + position);
         Movie movie = movies.get(position);
         holder.bind(movie);
     }
@@ -64,7 +62,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public void bind(Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
-            Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
+            String imageUrl;
+            int placeholder;
+
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                imageUrl = movie.getBackdropPath();
+                placeholder = R.drawable.backdrop_placeholder_background;
+            } else {
+                imageUrl = movie.getPosterPath();
+                placeholder = R.drawable.poster_placeholder_background;
+            }
+
+            Glide.with(context).load(imageUrl).placeholder(placeholder).into(ivPoster);
         }
     }
 }
