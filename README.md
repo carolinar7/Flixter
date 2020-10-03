@@ -19,6 +19,9 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 - [ ] Apply the popular ButterKnife annotation library to reduce view boilerplate. (1 point)
 - [x] Add a rounded corners for the images using the Glide transformations. (1 point)
 
+### App Walkthough GIF
+<img src='https://i.imgur.com/kYyQgg8.gif'/>
+
 ---
 
 ## Flix Part 1
